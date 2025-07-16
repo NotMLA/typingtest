@@ -9,12 +9,41 @@ const quotes = [
 let currentQuote = "";
 let startTime = null;
 
+function startCountdown() {
+  const countdownEl = document.getElementById("countdown");
+  const quoteEl = document.getElementById("quote");
+  const inputEl = document.getElementById("input");
+  const resultEl = document.getElementById("result");
+
+  quoteEl.textContent = "";
+  resultEl.textContent = "";
+  inputEl.value = "";
+  inputEl.disabled = true;
+  countdownEl.textContent = "Get ready...";
+  
+  let counter = 3;
+
+  const interval = setInterval(() => {
+    countdownEl.textContent = counter;
+    counter--;
+
+    if (counter < 0) {
+      clearInterval(interval);
+      countdownEl.textContent = "";
+      startTest(); // starts the actual test
+    }
+  }, 1000);
+}
+
 function startTest() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   currentQuote = quotes[randomIndex];
+
   document.getElementById("quote").textContent = currentQuote;
   document.getElementById("input").value = "";
   document.getElementById("result").textContent = "";
+  document.getElementById("input").disabled = false;
+  document.getElementById("input").focus();
   startTime = null;
 }
 
@@ -34,5 +63,3 @@ document.getElementById("input").addEventListener("input", function () {
     document.getElementById("result").textContent = `✅ Your speed is ${wpm} WPM!`;
   }
 });
-
-startTest();
