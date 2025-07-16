@@ -1,9 +1,9 @@
 const quotes = [
   "The quick brown fox jumps over the lazy dog.",
-  "Practice makes perfect.",
   "Typing speed test is a great way to learn.",
-  "Code every day and get better.",
-  "Learning to code is empowering."
+  "Practice makes perfect.",
+  "Never stop learning to code.",
+  "Coding is fun and powerful."
 ];
 
 let currentQuote = "";
@@ -15,22 +15,23 @@ function startCountdown() {
   const inputEl = document.getElementById("input");
   const resultEl = document.getElementById("result");
 
+  // Reset everything
   quoteEl.textContent = "";
   resultEl.textContent = "";
   inputEl.value = "";
   inputEl.disabled = true;
   countdownEl.textContent = "Get ready...";
-  
+
   let counter = 3;
 
-  const interval = setInterval(() => {
+  const countdownInterval = setInterval(() => {
     countdownEl.textContent = counter;
     counter--;
 
     if (counter < 0) {
-      clearInterval(interval);
+      clearInterval(countdownInterval);
       countdownEl.textContent = "";
-      startTest(); // starts the actual test
+      startTest(); // Start typing test
     }
   }, 1000);
 }
@@ -40,13 +41,13 @@ function startTest() {
   currentQuote = quotes[randomIndex];
 
   document.getElementById("quote").textContent = currentQuote;
-  document.getElementById("input").value = "";
-  document.getElementById("result").textContent = "";
   document.getElementById("input").disabled = false;
+  document.getElementById("input").value = "";
   document.getElementById("input").focus();
   startTime = null;
 }
 
+// Typing event
 document.getElementById("input").addEventListener("input", function () {
   if (!startTime) {
     startTime = new Date();
@@ -56,10 +57,14 @@ document.getElementById("input").addEventListener("input", function () {
 
   if (typedText === currentQuote) {
     const endTime = new Date();
-    const timeTaken = (endTime - startTime) / 1000;
+    const timeTaken = (endTime - startTime) / 1000; // in seconds
     const wordCount = typedText.trim().split(/\s+/).length;
     const wpm = Math.round((wordCount / timeTaken) * 60);
 
-    document.getElementById("result").textContent = `✅ Your speed is ${wpm} WPM!`;
+    document.getElementById("result").textContent =
+      `✅ Your speed is ${wpm} WPM!`;
   }
 });
+
+// Optional: start countdown on first page load
+window.onload = startCountdown;

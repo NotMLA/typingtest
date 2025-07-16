@@ -2,19 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Typing Speed Test</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="container">
     <h2>Typing Speed Test</h2>
+
+    <!-- Countdown display -->
     <div id="countdown" style="font-size: 24px; font-weight: bold;"></div>
+
+    <!-- Quote to type -->
     <p id="quote">Loading...</p>
+
+    <!-- Typing area -->
     <textarea id="input" placeholder="Start typing here..."></textarea>
+
+    <!-- Result display -->
     <div id="result"></div>
-    <button onclick="startTest()">Restart</button>
+
+    <!-- Restart button -->
+    <button onclick="startCountdown()">Start</button>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
